@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 
@@ -7,6 +8,7 @@ const { gameRouter, taskRouter } = require('./routes');
 const app = express();
 _mongooseConnector();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -22,12 +24,3 @@ app.listen(3000, () => {
 function _mongooseConnector() {
   mongoose.connect('mongodb://localhost:27017/words-base', { useNewUrlParser: true, useUnifiedTopology: true });
 }
-
-// const fs = require('fs');
-// const utils = require('util');
-//
-// const readFilePromise = utils.promisify(fs.readFile);
-//
-// readFilePromise('./dataBase/users.js').then(user => {
-//   console.log(user.toString());
-// })
